@@ -34,6 +34,11 @@ z_pcb_lipo_sw     = z_pcb + 4;
 x_pcb_lipo_usb_off =  0;
 x_pcb_lipo_usb     = 10;
 
+x_lipo = 64;
+x_lipo_off = 10;
+y_lipo = 37;
+z_lipo =  6;
+
 // base:
 //  - inner dimensions fit PCBs
 //  - added wall (w2)
@@ -43,5 +48,5 @@ w_base  = w2;
 r_base  = 3;
 xi_base = x_pcb_v2 + 2 + x_pcb_lora;
 xo_base = xi_base + 4*w_base;
-yi_base = y_pcb_v2 + 36;
+yi_base = y_pcb_v2 + y_lipo + 4*w2;
 yo_base = yi_base + 4*w_base;

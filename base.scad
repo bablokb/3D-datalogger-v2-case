@@ -72,6 +72,18 @@ module lipo_pcb(hull=false) {
         }
 }
 
+// --- module for the lipo   -------------------------------------------------
+
+module lipo() {
+  x = x_lipo + 2*w2;
+  y = y_lipo + 2*w2;
+  move([xi_base/2-x/2-x_lipo_off,-yi_base/2+y/2,0])
+    difference() {
+      rect_tube(h=z_lipo+b, size=[x,y], wall=w2, anchor=BOTTOM+CENTER);
+      move([-x/2,y/2,0]) cuboid([5,5,z_lipo+b+fuzz], anchor=BOTTOM+CENTER);
+    }
+}
+
 // --- create base-plate to fit all PCBs   -----------------------------------
 
 module plate() {
@@ -101,6 +113,7 @@ module base() {
   color("blue") v2_pcb();
   color("red") lora_pcb();
   color("green") lipo_pcb();
+  color("pink") lipo();
 }
 
 base();
