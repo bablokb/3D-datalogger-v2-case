@@ -25,8 +25,14 @@ x_pcb_lipo = 23.0;
 y_pcb_lipo = 35.0;
 d_pcb_lipo =  2.4;   // NPT diameter
 o_pcb_lipo =  2.5;   // NPT offset
-y_pcb_lipo_sw_off = -1.515; //from center, left side
-x_pcb_liop_usb_off = 0;
+
+x_pcb_lipo_sw_off =  4 - 2*w2; // from left side
+y_pcb_lipo_sw_off =  1.515; //from center, left side
+y_pcb_lipo_sw     = 10.4;
+z_pcb_lipo_sw     = z_pcb + 4;
+
+x_pcb_lipo_usb_off =  0;
+x_pcb_lipo_usb     = 10;
 
 // base:
 //  - inner dimensions fit PCBs
