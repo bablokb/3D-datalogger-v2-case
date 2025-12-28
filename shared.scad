@@ -1,0 +1,41 @@
+// ---------------------------------------------------------------------------
+// 3D-Model (OpenSCAD): Shared dimensions. 
+//
+// Author: Bernhard Bablok
+// License: GPL3
+//
+// https://github.com/bablokb/3D-datalogger-v2-case
+// ---------------------------------------------------------------------------
+
+include <BOSL2/std.scad>
+include <dimensions.scad>
+
+z_pcb = 1.6;  // all PCBs
+
+x_pcb_v2 = 70;
+y_pcb_v2 = 56;
+y_pcb_usb_off =  -0.91;  // from center, right side
+x_pcb_i2c_off =  -7.86;  // from center, top side
+x_pcb_uart_off = 28.65;  // from center, top side
+
+x_pcb_lora = 36.5;
+y_pcb_lora = 33.0;
+
+x_pcb_lipo = 23.0;
+y_pcb_lipo = 35.0;
+d_pcb_lipo =  2.4;   // NPT diameter
+o_pcb_lipo =  2.5;   // NPT offset
+y_pcb_lipo_sw_off = -1.515; //from center, left side
+x_pcb_liop_usb_off = 0;
+
+// base:
+//  - inner dimensions fit PCBs
+//  - added wall (w2)
+//  - added rim (w2) for wall of top
+
+w_base  = w2;
+r_base  = 3;
+xi_base = x_pcb_v2 + 2 + x_pcb_lora;
+xo_base = xi_base + 4*w_base;
+yi_base = y_pcb_v2 + 36;
+yo_base = yi_base + 4*w_base;
