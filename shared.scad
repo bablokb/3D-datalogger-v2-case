@@ -34,10 +34,13 @@ z_pcb_lipo_sw     = z_pcb + 4;
 x_pcb_lipo_usb_off =  0;
 x_pcb_lipo_usb     = 10;
 
+// Lipo holder with screws for cover
+
 x_lipo = 64;
-x_lipo_off = 10;
+x_lipo_off = 8;
 y_lipo = 37;
 z_lipo =  6;
+x_lipo_screw_off = 4;
 
 // base:
 //  - inner dimensions fit PCBs
