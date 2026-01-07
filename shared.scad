@@ -9,6 +9,7 @@
 
 include <BOSL2/std.scad>
 include <dimensions.scad>
+include <screw_pocket.scad>
 
 z_pcb = 1.6;  // all PCBs
 
@@ -41,6 +42,12 @@ x_lipo_off = 8;
 y_lipo = 37;
 z_lipo =  6;
 x_lipo_screw_off = 4;
+x_lipo_cover = x_lipo+2*w2+2*x_lipo_screw_off+DO_25;
+y_lipo_cover = 2*DO_25;
+
+// Display holder
+x_pcb_display = 68.26;
+y_pcb_display = 36.4;
 
 // base:
 //  - inner dimensions fit PCBs
