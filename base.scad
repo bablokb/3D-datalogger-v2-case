@@ -97,13 +97,9 @@ module plate() {
   h = 4;
   cuboid([xo_base,yo_base,b],
           rounding=r_base, edges=[BACK+RIGHT,FRONT+RIGHT], anchor=BOTTOM+CENTER);
-  // rect_tube does not define edges, so build it ourselves
-  zmove(b-fuzz) difference() {
-    cuboid([xi_base+2*w2,yi_base+2*w2,h],
-            rounding=r_base, edges=[BACK+RIGHT,FRONT+RIGHT], anchor=BOTTOM+CENTER);    
-    zmove(-fuzz) cuboid([xi_base,yi_base,h+2*fuzz],
-            rounding=r_base, edges=[BACK+RIGHT,FRONT+RIGHT], anchor=BOTTOM+CENTER);
-  }
+  // inner wall
+  rect_tube(isize=[xi_base,yi_base], wall=w_base, h=b+h,
+            rounding=[r_base,0,0,r_base], anchor=BOTTOM+CENTER);
 }
 
 // --- final object   -------------------------------------------------------
