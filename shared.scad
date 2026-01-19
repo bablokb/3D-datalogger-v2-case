@@ -56,7 +56,8 @@ y_pcb_display = 36.4;
 
 w_base  = w2;
 r_base  = 3;
+h_base  = 4;
 xi_base = x_pcb_v2 + 2 + x_pcb_lora;
 xo_base = xi_base + 4*w_base + 2*gap;
 yi_base = y_pcb_v2 + y_lipo + 4*w2;
-yo_base = yi_base + 4*w_base + 2*gap;;
+yo_base = yi_base + 4*w_base + 2*gap;
