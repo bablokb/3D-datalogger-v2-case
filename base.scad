@@ -1,5 +1,5 @@
 // ---------------------------------------------------------------------------
-// 3D-Model (OpenSCAD): 
+// 3D-Model (OpenSCAD): base of the case.
 //
 // Author: Bernhard Bablok
 // License: GPL3
@@ -9,27 +9,17 @@
 
 include <BOSL2/std.scad>
 include <shared.scad>
-include <screw_pocket.scad>
+include <pcb.scad>
+include <lipo_charger_pcb.scad>
 
-// --- generic module to create space for a PCB   ----------------------------
+// --- create base-plate to fit all PCBs   -----------------------------------
 
-module pcb(x, y, z=b, h_screw=3, o_screw=3, r=3, edges="Z", screws=true) {
-  difference() {
-    // solid space
-    cuboid([x,y,z], rounding=r, edges=edges, anchor=BOTTOM+CENTER);
-    // mask screw-pockets
-    if (screws) {
-      xflip_copy()
-        yflip_copy() move([-x/2+o_screw,-y/2+o_screw,-fuzz]) 
-          screw_pocket(h=h_screw, hull=true);
-    }
-  }
-  // add screw-pockets
-  if (screws) {
-    xflip_copy()
-      yflip_copy() move([-x/2+o_screw,-y/2+o_screw,-fuzz])
-        screw_pocket(h=h_screw, hull=false);
-  }
+module plate() {
+  cuboid([xo_base,yo_base,b],
+          rounding=r_base, edges=[BACK+RIGHT,FRONT+RIGHT], anchor=BOTTOM+CENTER);
+  // inner wall
+  rect_tube(isize=[xi_base,yi_base], wall=w_base, h=b+h_base,
+            rounding=[r_base,0,0,r_base], anchor=BOTTOM+CENTER);
 }
 
 // --- module for v2 PCB   ---------------------------------------------------
@@ -50,28 +40,6 @@ module lora_pcb(hull=false) {
           pcb(x_pcb_lora, y_pcb_lora, z, edges=[], screws=!hull);
 }
 
-// --- module for LiPo PCB   -------------------------------------------------
-
-module lipo_pcb(hull=false) {
-  z = hull ? b+2*fuzz : b;
-  zm = hull ? -fuzz : 0;
-  move([x_pcb_lipo_sw_off-xi_base/2+x_pcb_lipo/2,
-        -yi_base/2+y_pcb_lipo/2,zm]) {
-          pcb(x_pcb_lipo, y_pcb_lipo, z, o_screw=o_pcb_lipo,
-              edges=[], screws=!hull);
-          if (hull) {
-            // cutout switch
-            move([-x_pcb_lipo/2,y_pcb_lipo_sw_off,z])
-              cuboid([20,y_pcb_lipo_sw,z_pcb_lipo_sw],
-                anchor=BOTTOM+CENTER);
-            // cutout USB
-            move([x_pcb_lipo_usb_off,-y_pcb_lipo/2,z])
-              cuboid([x_pcb_lipo_usb,20,z_pcb_lipo_sw],
-                anchor=BOTTOM+CENTER);
-          }
-        }
-}
-
 // --- module for the lipo   -------------------------------------------------
 
 module lipo(hull=false) {
@@ -85,21 +53,7 @@ module lipo(hull=false) {
         move([-x/2,y/2,0]) cuboid([5,5,z_lipo+b+fuzz], anchor=BOTTOM+CENTER);
       }
     }
-    // screw-pockets on left and right
-    move([-x/2-x_lipo_screw_off,0,-fuzz]) screw_pocket(h=z_lipo+b,hull=hull);
-    move([x/2+x_lipo_screw_off,0,-fuzz]) screw_pocket(h=z_lipo+b,hull=hull);
   }
-}
-
-// --- create base-plate to fit all PCBs   -----------------------------------
-
-module plate() {
-  h = 4;
-  cuboid([xo_base,yo_base,b],
-          rounding=r_base, edges=[BACK+RIGHT,FRONT+RIGHT], anchor=BOTTOM+CENTER);
-  // inner wall
-  rect_tube(isize=[xi_base,yi_base], wall=w_base, h=b+h,
-            rounding=[r_base,0,0,r_base], anchor=BOTTOM+CENTER);
 }
 
 // --- final object   -------------------------------------------------------
@@ -110,15 +64,14 @@ module base() {
     plate();
     v2_pcb(hull=true);
     lora_pcb(hull=true);
-    lipo_pcb(hull=true);
+    lipo_charger_pcb(hull=true);
     lipo(hull=true);
   }
   // add back PCBs
   color("blue") v2_pcb();
   color("red") lora_pcb();
-  color("green") lipo_pcb();
+  color("green") lipo_charger_pcb();
   color("pink") lipo();
 }
 
 base();
-//lipo_pcb(hull=true);
