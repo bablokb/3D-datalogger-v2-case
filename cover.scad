@@ -12,7 +12,8 @@ include <dimensions.scad>
 include <shared.scad>
 include <screw_pocket.scad>
 
-Y_TOP   = Y_PCB_V2+5 + 2*W_BASE + GAP;
+Y_TOP_ADD = 5;
+Y_TOP   = Y_PCB_V2 + Y_TOP_ADD + 2*W_BASE + GAP;
 Z_TOP   = BT;
 H_COVER = YO_BASE-Y_TOP;
 P_DIFF  = Z_TOP / (H_COVER/(YO_BASE-Y_TOP));
@@ -50,15 +51,17 @@ module sensor_cutouts(h) {
 
 module top_plate(h=BT) {
   z = h+2*FUZZ;
+  y_off = Y_TOP/2 - Y_PCB_V2/2 - 2*W_BASE - GAP;
   difference() {
     prismoid(size1=[XO_BASE, Y_TOP],
                  size2=[XO_BASE, Y_TOP-P_DIFF],
                  shift=[0,P_DIFF/2], h=h,
             rounding=[R_BASE,0,0,R_BASE], anchor=BOTTOM+CENTER);
-    xmove(XI_BASE/2-X_PCB_V2/2) sensor_cutouts(h=h);
+    move([XI_BASE/2-X_PCB_V2/2,
+          y_off,0]) sensor_cutouts(h=h);
   }
   // add screw holes
-  xmove(XI_BASE/2-X_PCB_V2/2)
+  move([XI_BASE/2-X_PCB_V2/2,y_off,0])
     xflip_copy() yflip_copy()
       move([-32,-25,-FUZZ]) xrot(180,cp=[0,0,z/2])
          scale(1+FUZZ) screw_pocket(h=z, hull=false);
@@ -91,7 +94,7 @@ module lipo_charger_cutout() {
 // --- final object   ---------------------------------------------------------
 
 //difference() {
-  cover(ztop=Z_TOP);
+//  cover(ztop=Z_TOP);
 //}
 
-//top_plate(h=Z_TOP);
+top_plate(h=Z_TOP);
