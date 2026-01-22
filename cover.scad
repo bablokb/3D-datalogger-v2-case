@@ -13,8 +13,16 @@ include <shared.scad>
 include <screw_pocket.scad>
 
 Y_TOP   = Y_PCB_V2+5 + 2*W_BASE + GAP;
-H_COVER = 27;
-P_DIFF = 2*BT;  // TODO: calculate from angle using H_COVER and y
+Z_TOP   = BT;
+H_COVER = YO_BASE-Y_TOP;
+P_DIFF  = Z_TOP / (H_COVER/(YO_BASE-Y_TOP));
+
+echo("H_COVER        = ", H_COVER);
+echo("H_TOTOAL       = ", BT + H_BASE + H_COVER + Z_TOP);
+echo("YO_BASE        = ", YO_BASE);
+echo("Y_TOP          = ", Y_TOP);
+echo("yz-size slanted = ", sqrt((YO_BASE-Y_TOP)^2+H_COVER^2));
+echo("angle          = ", atan(H_COVER/(YO_BASE-Y_TOP)));
 
 // --- cutouts for the sensor pcb   -------------------------------------------
 
@@ -53,21 +61,24 @@ module top_plate(h=BT) {
   xmove(XI_BASE/2-X_PCB_V2/2)
     xflip_copy() yflip_copy()
       move([-32,-25,-FUZZ]) xrot(180,cp=[0,0,z/2])
-         screw_pocket(h=z, hull=false);
+         scale(1+FUZZ) screw_pocket(h=z, hull=false);
 }
 
 // --- cover   ----------------------------------------------------------------
 
-module cover(htop=BT) {
+module cover(ztop=BT) {
+  // lower wall
   rect_tube(size=[XO_BASE,YO_BASE], wall=W_BASE, h=H_BASE,
             rounding=[R_BASE,0,0,R_BASE], anchor=BOTTOM+CENTER);
+  // slanted wall
   zmove(H_BASE-FUZZ)
     rect_tube(size1=[XO_BASE,YO_BASE],
             size2=[XO_BASE,Y_TOP],
             shift=[0,(YO_BASE-Y_TOP)/2],
             wall=W_BASE, h=H_COVER,
             rounding=[R_BASE,0,0,R_BASE], anchor=BOTTOM+CENTER);
-  move([0,(YO_BASE-Y_TOP)/2,H_COVER+H_BASE-FUZZ]) top_plate(h=htop);
+  // top plate
+  move([0,(YO_BASE-Y_TOP)/2,H_COVER+H_BASE-FUZZ]) top_plate(h=ztop);
 }
 
 // --- cutouts for the lipo_charger   -----------------------------------------
@@ -80,7 +91,7 @@ module lipo_charger_cutout() {
 // --- final object   ---------------------------------------------------------
 
 //difference() {
-  cover(htop=BT);
+  cover(ztop=Z_TOP);
 //}
 
-//top_plate(htop=BT);
+//top_plate(h=Z_TOP);
