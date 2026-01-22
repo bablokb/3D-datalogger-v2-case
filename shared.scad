@@ -15,6 +15,7 @@ Z_PCB = 1.6;  // all PCBs
 
 X_PCB_V2 = 70;
 Y_PCB_V2 = 56;
+H_PCB_V2_SCREW = 6;
 Y_PCB_USB_OFF =  -0.91;  // from center, right side
 X_PCB_I2C_OFF =  -7.86;  // from center, top side
 X_PCB_UART_OFF = 28.65;  // from center, top side

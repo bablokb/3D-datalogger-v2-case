@@ -27,7 +27,8 @@ module v2_pcb(hull=false) {
   z = hull ? BT+2*FUZZ : BT;
   zm = hull ? -FUZZ : 0;
   move([XI_BASE/2-X_PCB_V2/2,YI_BASE/2-Y_PCB_V2/2,zm])
-          pcb(X_PCB_V2, Y_PCB_V2, z, edges=[BACK+RIGHT], screws=!hull);
+          pcb(X_PCB_V2, Y_PCB_V2, z, h_screw=BT+H_PCB_V2_SCREW,
+              edges=[BACK+RIGHT], screws=!hull);
 }
 
 // --- module for LoRa PCB   -------------------------------------------------
