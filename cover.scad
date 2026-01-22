@@ -12,8 +12,9 @@ include <dimensions.scad>
 include <shared.scad>
 include <screw_pocket.scad>
 
-h_cover = 27;
-P_DIFF = 2*BT;  // TODO: calculate from angle using h_cover and y
+Y_TOP   = Y_PCB_V2+5 + 2*W_BASE + GAP;
+H_COVER = 27;
+P_DIFF = 2*BT;  // TODO: calculate from angle using H_COVER and y
 
 // --- cutouts for the sensor pcb   -------------------------------------------
 
@@ -42,12 +43,11 @@ module sensor_cutouts(h) {
 module top_plate(h=BT) {
   z = h+2*FUZZ;
   difference() {
-      prismoid(size1=[XO_BASE, Y_PCB_V2],
-                 size2=[XO_BASE, Y_PCB_V2-P_DIFF],
+    prismoid(size1=[XO_BASE, Y_TOP],
+                 size2=[XO_BASE, Y_TOP-P_DIFF],
                  shift=[0,P_DIFF/2], h=h,
             rounding=[R_BASE,0,0,R_BASE], anchor=BOTTOM+CENTER);
-    xmove(XI_BASE/2-X_PCB_V2/2)
-      sensor_cutouts(h=h);
+    xmove(XI_BASE/2-X_PCB_V2/2) sensor_cutouts(h=h);
   }
   // add screw holes
   xmove(XI_BASE/2-X_PCB_V2/2)
@@ -58,16 +58,16 @@ module top_plate(h=BT) {
 
 // --- cover   ----------------------------------------------------------------
 
-module cover() {
+module cover(htop=BT) {
   rect_tube(size=[XO_BASE,YO_BASE], wall=W_BASE, h=H_BASE,
             rounding=[R_BASE,0,0,R_BASE], anchor=BOTTOM+CENTER);
   zmove(H_BASE-FUZZ)
     rect_tube(size1=[XO_BASE,YO_BASE],
-            size2=[XO_BASE,Y_PCB_V2],
-            shift=[0,(YO_BASE-Y_PCB_V2)/2],
-            wall=W_BASE, h=h_cover-BT,
+            size2=[XO_BASE,Y_TOP],
+            shift=[0,(YO_BASE-Y_TOP)/2],
+            wall=W_BASE, h=H_COVER,
             rounding=[R_BASE,0,0,R_BASE], anchor=BOTTOM+CENTER);
-  zmove(h_cover+H_BASE-BT-FUZZ) top_plate();
+  move([0,(YO_BASE-Y_TOP)/2,H_COVER+H_BASE-FUZZ]) top_plate(h=htop);
 }
 
 // --- cutouts for the lipo_charger   -----------------------------------------
@@ -80,7 +80,7 @@ module lipo_charger_cutout() {
 // --- final object   ---------------------------------------------------------
 
 //difference() {
-//  cover();
+  cover(htop=BT);
 //}
 
-top_plate();
+//top_plate(htop=BT);
