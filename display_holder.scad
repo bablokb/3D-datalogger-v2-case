@@ -17,14 +17,14 @@ module plate(c, y, w, msize=50, mask=false,
   if (!mask) {
     cuboid([c,y,w], anchor=BOTTOM+CENTER);
   } else {
-    move([-c/2+o_screw,0,-fuzz]) {
-          cylinder(d=d_screw, h=w+2*fuzz,anchor=BOTTOM+CENTER);
-          zmove(-msize-fuzz)
+    move([-c/2+o_screw,0,-FUZZ]) {
+          cylinder(d=d_screw, h=w+2*FUZZ,anchor=BOTTOM+CENTER);
+          zmove(-msize-FUZZ)
             cylinder(d=d2_screw, h=msize+h_screw,anchor=BOTTOM+CENTER);
     }
-    move([+c/2-o_screw,0,-fuzz]) {
-          cylinder(d=d_screw, h=w+2*fuzz,anchor=BOTTOM+CENTER);
-          zmove(-msize-fuzz)
+    move([+c/2-o_screw,0,-FUZZ]) {
+          cylinder(d=d_screw, h=w+2*FUZZ,anchor=BOTTOM+CENTER);
+          zmove(-msize-FUZZ)
             cylinder(d=d2_screw, h=msize+h_screw,anchor=BOTTOM+CENTER);
     }
   }
@@ -58,11 +58,11 @@ module display_holder(x,y,h1,h2,w, open=true) {
 //y = 10;
 //h1= 30;
 //h2= 10;
-//w = w4;
+//w = W4;
 //c = sqrt((h1-h2)^2+x^2);
 
-w  = w4;
-c  = 36.4;  // y_pcb_display
+w  = W4;
+c  = 36.4;  // Y_PCB_DISPLAY
 y  = 10;
 h1 = 19;
 h2 = w;

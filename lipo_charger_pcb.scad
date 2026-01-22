@@ -14,20 +14,20 @@ include <pcb.scad>
 // --- module for LiPo PCB   -------------------------------------------------
 
 module lipo_charger_pcb(hull=false) {
-  z = hull ? b+2*fuzz : b;
-  zm = hull ? -fuzz : 0;
-  move([x_pcb_lipo_sw_off-xi_base/2+x_pcb_lipo/2,
-        -yi_base/2+y_pcb_lipo/2,zm]) {
-          pcb(x_pcb_lipo, y_pcb_lipo, z, o_screw=o_pcb_lipo,
+  z = hull ? BT+2*FUZZ : BT;
+  zm = hull ? -FUZZ : 0;
+  move([X_PCB_LIPO_SW_OFF-XI_BASE/2+X_PCB_LIPO/2,
+        -YI_BASE/2+Y_PCB_LIPO/2,zm]) {
+          pcb(X_PCB_LIPO, Y_PCB_LIPO, z, o_screw=O_PCB_LIPO,
               edges=[], screws=!hull);
           if (hull) {
             // cutout switch
-            move([-x_pcb_lipo/2,y_pcb_lipo_sw_off,z])
-              cuboid([20,y_pcb_lipo_sw,z_pcb_lipo_sw],
+            move([-X_PCB_LIPO/2,Y_PCB_LIPO_SW_OFF,z])
+              cuboid([20,Y_PCB_LIPO_SW,Z_PCB_LIPO_SW],
                 anchor=BOTTOM+CENTER);
             // cutout USB
-            move([x_pcb_lipo_usb_off,-y_pcb_lipo/2,z])
-              cuboid([x_pcb_lipo_usb,20,z_pcb_lipo_sw],
+            move([X_PCB_LIPO_USB_OFF,-Y_PCB_LIPO/2,z])
+              cuboid([X_PCB_LIPO_usb,20,Z_PCB_LIPO_SW],
                 anchor=BOTTOM+CENTER);
           }
         }

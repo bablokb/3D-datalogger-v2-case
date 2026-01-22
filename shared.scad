@@ -11,53 +11,53 @@ include <BOSL2/std.scad>
 include <dimensions.scad>
 include <screw_pocket.scad>
 
-z_pcb = 1.6;  // all PCBs
+Z_PCB = 1.6;  // all PCBs
 
-x_pcb_v2 = 70;
-y_pcb_v2 = 56;
-y_pcb_usb_off =  -0.91;  // from center, right side
-x_pcb_i2c_off =  -7.86;  // from center, top side
-x_pcb_uart_off = 28.65;  // from center, top side
+X_PCB_V2 = 70;
+Y_PCB_V2 = 56;
+Y_PCB_USB_OFF =  -0.91;  // from center, right side
+X_PCB_I2C_OFF =  -7.86;  // from center, top side
+X_PCB_UART_OFF = 28.65;  // from center, top side
 
-x_pcb_lora = 36.5;
-y_pcb_lora = 33.0;
+X_PCB_LORA = 36.5;
+Y_PCB_LORA = 33.0;
 
-x_pcb_lipo = 23.0;
-y_pcb_lipo = 35.0;
-d_pcb_lipo =  2.4;   // NPT diameter
-o_pcb_lipo =  2.5;   // NPT offset
+X_PCB_LIPO = 23.0;
+Y_PCB_LIPO = 35.0;
+D_PCB_LIPO =  2.4;   // NPT diameter
+O_PCB_LIPO =  2.5;   // NPT offset
 
-x_pcb_lipo_sw_off =  4 - 2*w2; // from left side
-y_pcb_lipo_sw_off =  1.515; //from center, left side
-y_pcb_lipo_sw     = 10.4;
-z_pcb_lipo_sw     = z_pcb + 4;
+X_PCB_LIPO_SW_OFF =  4 - 2*W2; // from left side
+Y_PCB_LIPO_SW_OFF =  1.515; //from center, left side
+Y_PCB_LIPO_SW     = 10.4;
+Z_PCB_LIPO_SW     = Z_PCB + 4;
 
-x_pcb_lipo_usb_off =  0;
-x_pcb_lipo_usb     = 10;
+X_PCB_LIPO_USB_OFF =  0;
+X_PCB_LIPO_usb     = 10;
 
 // Lipo holder with screws for cover
 
-x_lipo = 64;
-x_lipo_off = 8;
-y_lipo = 37;
-z_lipo =  6;
-x_lipo_screw_off = 4;
-x_lipo_cover = x_lipo+2*w2+2*x_lipo_screw_off+DO_25;
-y_lipo_cover = 2*DO_25;
+X_LIPO = 64;
+X_LIPO_OFF = 8;
+Y_LIPO = 37;
+Z_LIPO =  6;
+X_LIPO_SCREW_OFF = 4;
+X_LIPO_COVER = X_LIPO+2*W2+2*X_LIPO_SCREW_OFF+DO_25;
+Y_LIPO_COVER = 2*DO_25;
 
 // Display holder
-x_pcb_display = 68.26;
-y_pcb_display = 36.4;
+X_PCB_DISPLAY = 68.26;
+Y_PCB_DISPLAY = 36.4;
 
 // base:
 //  - inner dimensions fit PCBs
-//  - added wall (w2)
-//  - added rim (w2) for wall of top
+//  - added wall (W2)
+//  - added rim (W2) for wall of top
 
-w_base  = w2;
-r_base  = 3;
-h_base  = 4;
-xi_base = x_pcb_v2 + 2 + x_pcb_lora;
-xo_base = xi_base + 4*w_base + 2*gap;
-yi_base = y_pcb_v2 + y_lipo + 4*w2;
-yo_base = yi_base + 4*w_base + 2*gap;
+W_BASE  = W2;
+R_BASE  = 3;
+H_BASE  = 4;
+XI_BASE = X_PCB_V2 + 2 + X_PCB_LORA;
+XO_BASE = XI_BASE + 4*W_BASE + 2*GAP;
+YI_BASE = Y_PCB_V2 + Y_LIPO + 4*W2;
+YO_BASE = YI_BASE + 4*W_BASE + 2*GAP;

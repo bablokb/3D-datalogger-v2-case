@@ -15,42 +15,42 @@ include <lipo_charger_pcb.scad>
 // --- create base-plate to fit all PCBs   -----------------------------------
 
 module plate() {
-  cuboid([xo_base,yo_base,b],
-          rounding=r_base, edges=[BACK+RIGHT,FRONT+RIGHT], anchor=BOTTOM+CENTER);
+  cuboid([XO_BASE,YO_BASE,BT],
+          rounding=R_BASE, edges=[BACK+RIGHT,FRONT+RIGHT], anchor=BOTTOM+CENTER);
   // inner wall
-  rect_tube(isize=[xi_base,yi_base], wall=w_base, h=b+h_base,
-            rounding=[r_base,0,0,r_base], anchor=BOTTOM+CENTER);
+  rect_tube(isize=[XI_BASE,YI_BASE], wall=W_BASE, h=BT+H_BASE,
+            rounding=[R_BASE,0,0,R_BASE], anchor=BOTTOM+CENTER);
 }
 
 // --- module for v2 PCB   ---------------------------------------------------
 
 module v2_pcb(hull=false) {
-  z = hull ? b+2*fuzz : b;
-  zm = hull ? -fuzz : 0;
-  move([xi_base/2-x_pcb_v2/2,yi_base/2-y_pcb_v2/2,zm])
-          pcb(x_pcb_v2, y_pcb_v2, z, edges=[BACK+RIGHT], screws=!hull);
+  z = hull ? BT+2*FUZZ : BT;
+  zm = hull ? -FUZZ : 0;
+  move([XI_BASE/2-X_PCB_V2/2,YI_BASE/2-Y_PCB_V2/2,zm])
+          pcb(X_PCB_V2, Y_PCB_V2, z, edges=[BACK+RIGHT], screws=!hull);
 }
 
 // --- module for LoRa PCB   -------------------------------------------------
 
 module lora_pcb(hull=false) {
-  z = hull ? b+2*fuzz : b;
-  zm = hull ? -fuzz : 0;
-  move([-xi_base/2+x_pcb_lora/2,yi_base/2-y_pcb_lora/2,zm])
-          pcb(x_pcb_lora, y_pcb_lora, z, edges=[], screws=!hull);
+  z = hull ? BT+2*FUZZ : BT;
+  zm = hull ? -FUZZ : 0;
+  move([-XI_BASE/2+X_PCB_LORA/2,YI_BASE/2-Y_PCB_LORA/2,zm])
+          pcb(X_PCB_LORA, Y_PCB_LORA, z, edges=[], screws=!hull);
 }
 
 // --- module for the lipo   -------------------------------------------------
 
 module lipo(hull=false) {
-  x = x_lipo + 2*w2;
-  y = y_lipo + 2*w2;
-  move([xi_base/2-x/2-x_lipo_off,-yi_base/2+y/2,0]) {
+  x = X_LIPO + 2*W2;
+  y = Y_LIPO + 2*W2;
+  move([XI_BASE/2-x/2-X_LIPO_OFF,-YI_BASE/2+y/2,0]) {
     // lipo-holder (wall with cutout for cable)
     if (!hull) {
       difference() {
-        rect_tube(h=z_lipo+b, size=[x,y], wall=w2, anchor=BOTTOM+CENTER);
-        move([-x/2,y/2,0]) cuboid([5,5,z_lipo+b+fuzz], anchor=BOTTOM+CENTER);
+        rect_tube(h=Z_LIPO+BT, size=[x,y], wall=W2, anchor=BOTTOM+CENTER);
+        move([-x/2,y/2,0]) cuboid([5,5,Z_LIPO+BT+FUZZ], anchor=BOTTOM+CENTER);
       }
     }
   }
