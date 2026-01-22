@@ -26,9 +26,9 @@ module sensor_cutouts(h) {
   // LED + app-buttons
   move([-15.4,17,-fuzz]) cuboid([29.2,12,z], anchor=BOTTOM+CENTER);
   // on + reset
-  move([-24.65,-10.2,-fuzz]) cuboid([10.3,23.6,z], anchor=BOTTOM+CENTER);
+  move([-23.85,-9.2,-fuzz]) cuboid([11.9,15.2,z], anchor=BOTTOM+CENTER);
   // SCD4x connector
-  move([6.4,9.1,-fuzz]) cuboid([10.8,3,z], anchor=BOTTOM+CENTER);
+  move([7.45,-0.8,-fuzz]) cuboid([13.6,22.6,z], anchor=BOTTOM+CENTER);
   // AHT20
   move([18.45,14.1,-fuzz]) cuboid([8.5,10.2,z], anchor=BOTTOM+CENTER);
   // PDM
