@@ -12,10 +12,9 @@ include <dimensions.scad>
 include <shared.scad>
 include <screw_pocket.scad>
 
-Y_TOP_ADD = 5;
-Y_TOP   = Y_PCB_V2 + Y_TOP_ADD + 2*W_BASE + GAP;
+H_COVER = 23;
+Y_TOP   = YO_BASE - H_COVER;   // will force  angle=45°
 Z_TOP   = BT;
-H_COVER = YO_BASE-Y_TOP;
 P_DIFF  = Z_TOP / (H_COVER/(YO_BASE-Y_TOP));
 
 echo("H_COVER        = ", H_COVER);
@@ -94,7 +93,7 @@ module lipo_charger_cutout() {
 // --- final object   ---------------------------------------------------------
 
 //difference() {
-//  cover(ztop=Z_TOP);
+  cover(ztop=Z_TOP);
 //}
 
-top_plate(h=Z_TOP);
+//top_plate(h=Z_TOP);
