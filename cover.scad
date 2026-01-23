@@ -96,4 +96,9 @@ module lipo_charger_cutout() {
   cover(ztop=Z_TOP);
 //}
 
-//top_plate(h=Z_TOP);
+// intersection for a test print of the top panel
+//intersection() {
+//  top_plate(h=Z_TOP);
+//  move([XO_BASE/2-X_PCB_V2/2,10,-FUZZ])
+//    cuboid([X_PCB_V2+10,YO_BASE-40,0.6], anchor=BOTTOM+CENTER);
+//}
