@@ -11,6 +11,9 @@ include <BOSL2/std.scad>
 include <dimensions.scad>
 include <screw_pocket.scad>
 
+XY_USB = 10;   // USB cutout size (X or Y dimension)
+Z_USB  =  6;   // USB cutout size (Z dimension)
+
 Z_PCB = 1.6;  // all PCBs
 
 X_PCB_V2 = 70;
@@ -31,10 +34,9 @@ O_PCB_LIPO =  2.5;   // NPT offset
 X_PCB_LIPO_SW_OFF =  4 - 2*W2; // from left side
 Y_PCB_LIPO_SW_OFF =  1.515; //from center, left side
 Y_PCB_LIPO_SW     = 10.4;
-Z_PCB_LIPO_SW     = Z_PCB + 4;
+Z_PCB_LIPO_SW     = 4;
 
 X_PCB_LIPO_USB_OFF =  0;
-X_PCB_LIPO_USB     = 10;
 
 // Lipo holder with screws for cover
 
