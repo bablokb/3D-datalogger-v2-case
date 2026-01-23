@@ -85,16 +85,23 @@ module cover(ztop=BT) {
 
 // --- cutouts for the lipo_charger   -----------------------------------------
 
-module lipo_charger_cutout() {
+module lipo_charger_cutouts() {
   // USB
+  move([-XO_BASE/2+X_PCB_LIPO/2 + X_PCB_LIPO_SW_OFF,
+        -YO_BASE/2,-FUZZ])
+    cuboid([XY_USB,4*W_BASE,H_BASE+Z_USB], anchor=BOTTOM+CENTER);
   // slider
+  move([-XO_BASE/2,
+        -YI_BASE/2+Y_PCB_LIPO/2+Y_PCB_LIPO_SW_OFF,-FUZZ])
+    cuboid([4*W_BASE,Y_PCB_LIPO_SW,H_BASE+Z_PCB_LIPO_SW/2], anchor=BOTTOM+CENTER);
 }
 
 // --- final object   ---------------------------------------------------------
 
-//difference() {
+difference() {
   cover(ztop=Z_TOP);
-//}
+  lipo_charger_cutouts();
+}
 
 // intersection for a test print of the top panel
 //intersection() {
