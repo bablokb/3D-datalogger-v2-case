@@ -23,4 +23,7 @@ module pico_pin_mask(z=10) {
       }
 }
 
-//pico_pin_mask();
+//difference() {
+//  cuboid([68.26,36.4,0.6], anchor=BOTTOM+CENTER);
+//  pico_pin_mask();
+//}
