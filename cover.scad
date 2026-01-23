@@ -11,18 +11,20 @@ include <BOSL2/std.scad>
 include <dimensions.scad>
 include <shared.scad>
 include <screw_pocket.scad>
+include <pico_pin_mask.scad>
 
 H_COVER = 23;
 Y_TOP   = YO_BASE - H_COVER;   // will force  angle=45°
 Z_TOP   = BT;
 P_DIFF  = Z_TOP / (H_COVER/(YO_BASE-Y_TOP));
+ANGLE   = atan(H_COVER/(YO_BASE-Y_TOP));
 
 echo("H_COVER        = ", H_COVER);
 echo("H_TOTOAL       = ", BT + H_BASE + H_COVER + Z_TOP);
 echo("YO_BASE        = ", YO_BASE);
 echo("Y_TOP          = ", Y_TOP);
 echo("yz-size slanted = ", sqrt((YO_BASE-Y_TOP)^2+H_COVER^2));
-echo("angle          = ", atan(H_COVER/(YO_BASE-Y_TOP)));
+echo("angle          = ", ANGLE);
 
 // --- cutouts for the sensor pcb   -------------------------------------------
 
@@ -101,6 +103,8 @@ module lipo_charger_cutouts() {
 difference() {
   cover(ztop=Z_TOP);
   lipo_charger_cutouts();
+  move([0,-YO_BASE/2+(YO_BASE-Y_TOP)/2,
+          H_BASE+H_COVER/2]) xrot(ANGLE) pico_pin_mask();
 }
 
 // intersection for a test print of the top panel
