@@ -34,7 +34,7 @@ Y_PCB_LIPO_SW     = 10.4;
 Z_PCB_LIPO_SW     = Z_PCB + 4;
 
 X_PCB_LIPO_USB_OFF =  0;
-X_PCB_LIPO_usb     = 10;
+X_PCB_LIPO_USB     = 10;
 
 // Lipo holder with screws for cover
 

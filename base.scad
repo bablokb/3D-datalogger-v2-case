@@ -56,7 +56,7 @@ module lipo_charger_pcb(hull=false) {
                 anchor=BOTTOM+CENTER);
             // cutout USB
             move([X_PCB_LIPO_USB_OFF,-Y_PCB_LIPO/2,z])
-              cuboid([X_PCB_LIPO_usb,20,Z_PCB_LIPO_SW],
+              cuboid([X_PCB_LIPO_USB,20,Z_PCB_LIPO_SW],
                 anchor=BOTTOM+CENTER);
           }
         }
