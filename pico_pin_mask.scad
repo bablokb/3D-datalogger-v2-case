@@ -11,7 +11,7 @@ include <BOSL2/std.scad>
 include <dimensions.scad>
 
 Y_DELTA_PINS = 7*2.54/2;
-D_PINS = 1.1;
+D_PINS = 1.4;
 
 // --- use this to mask pins in other objects   ------------------------------
 
