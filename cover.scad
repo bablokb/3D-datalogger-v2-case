@@ -13,12 +13,6 @@ include <shared.scad>
 include <screw_pocket.scad>
 include <pico_pin_mask.scad>
 
-H_COVER = 23;
-Y_TOP   = YO_BASE - H_COVER;   // will force  angle=45°
-Z_TOP   = BT;
-P_DIFF  = Z_TOP / (H_COVER/(YO_BASE-Y_TOP));
-ANGLE   = atan(H_COVER/(YO_BASE-Y_TOP));
-
 echo("H_COVER        = ", H_COVER);
 echo("H_TOTOAL       = ", BT + H_BASE + H_COVER + Z_TOP);
 echo("YO_BASE        = ", YO_BASE);
@@ -98,11 +92,29 @@ module lipo_charger_cutouts() {
     cuboid([4*W_BASE,Y_PCB_LIPO_SW,H_BASE+Z_PCB_LIPO_SW/2], anchor=BOTTOM+CENTER);
 }
 
+// --- cutouts for USB and I2C of PCB   ---------------------------------------
+
+module pcb_cutouts() {
+  // I2C1 at back-edge
+  move([-X_PCB_I2C1_OFF,YO_BASE/2,Z_PCB_I2C1_OFF])
+    cuboid([XY_I2C,4*W_BASE,Z_I2C], anchor=BOTTOM+CENTER);
+  // I2C0 at right-edge
+  move([XO_BASE/2,Y_PCB_I2C0_OFF,Z_PCB_I2C0_OFF])
+    cuboid([4*W_BASE,XY_I2C,Z_I2C], anchor=BOTTOM+CENTER);
+  // USB at right-edge (enlarged to merge with sensor-pcb I2C)
+  move([XO_BASE/2,Y_PCB_USB_OFF-0.2,Z_PCB_USB_OFF])
+    cuboid([4*W_BASE,XY_USB+0.4,Z_USB+1.8], anchor=BOTTOM+CENTER);
+  // I2C1 at right-edge
+  move([XO_BASE/2,Y_SENSOR_I2C1_OFF,Z_SENSOR_I2C1_OFF])
+    cuboid([4*W_BASE,XY_I2C,Z_I2C], anchor=BOTTOM+CENTER);
+}
+
 // --- final object   ---------------------------------------------------------
 
 difference() {
   cover(ztop=Z_TOP);
   lipo_charger_cutouts();
+  pcb_cutouts();
   move([0,-YO_BASE/2+(YO_BASE-Y_TOP)/2,
           H_BASE+H_COVER/2]) xrot(ANGLE) pico_pin_mask();
 }

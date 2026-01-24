@@ -14,13 +14,15 @@ include <screw_pocket.scad>
 XY_USB = 10;   // USB cutout size (X or Y dimension)
 Z_USB  =  6;   // USB cutout size (Z dimension)
 
+XY_I2C =  9;
+Z_I2C  =  3.6;
+
 Z_PCB = 1.6;  // all PCBs
 
 X_PCB_V2 = 70;
 Y_PCB_V2 = 56;
 H_PCB_V2_SCREW = 6;      // hight screw-pocket above BT (base-thickness)
-Y_PCB_USB_OFF =  -0.91;  // from center, right side
-X_PCB_I2C_OFF =  -7.86;  // from center, top side
+
 X_PCB_UART_OFF = 28.65;  // from center, top side
 
 X_PCB_LORA = 36.5;
@@ -64,3 +66,29 @@ XI_BASE = X_PCB_V2 + 2 + X_PCB_LORA;
 XO_BASE = XI_BASE + 4*W_BASE + 2*GAP;
 YI_BASE = Y_PCB_V2 + Y_LIPO + 4*W2;
 YO_BASE = YI_BASE + 4*W_BASE + 2*GAP;
+
+
+// cover
+
+H_COVER = 23;
+Y_TOP   = YO_BASE - H_COVER;   // will force  angle=45°
+Z_TOP   = BT;
+P_DIFF  = Z_TOP / (H_COVER/(YO_BASE-Y_TOP));
+ANGLE   = atan(H_COVER/(YO_BASE-Y_TOP));
+
+// offsets for USB and I2C
+C_PCB_OFF     = YO_BASE/2 - 2*W_BASE - GAP - Y_PCB_V2/2;   // center offset
+Y_PCB_USB_OFF =   C_PCB_OFF + 0.91;  // from center, right side
+Z_PCB_USB_OFF =   H_PCB_V2_SCREW + Z_PCB + 10;
+
+Y_PCB_I2C0_OFF =  C_PCB_OFF + 0.91;  // from center, right side
+Z_PCB_I2C0_OFF =  H_PCB_V2_SCREW + Z_PCB;
+
+X_PCB_I2C1_OFF =  -7.86;  // from center, top side
+Z_PCB_I2C1_OFF =  Z_PCB_I2C0_OFF;
+
+// I2C on sensor-pcb is centered
+// Z-offset calculated from total height (except panel)
+Y_SENSOR_I2C1_OFF =  C_PCB_OFF;
+Z_SENSOR_I2C1_OFF =  H_BASE + H_COVER - Z_PCB - Z_I2C;
+
