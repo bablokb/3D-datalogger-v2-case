@@ -2,9 +2,7 @@ A case for the Pico-Datalogger v2
 =================================
 
 This project provides the 3D-design-files (OpenSCAD) for a case
-for the Pico Datalogger (see
-https://github.com/bablokb/pcb-pico-datalogger).
-
+for the Pico Datalogger (see https://github.com/bablokb/pcb-datalogger-v2).
 
 
 License
