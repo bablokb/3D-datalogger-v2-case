@@ -3,3 +3,6 @@
 *.3mf
 work
 TODO
+
+# shared.scad must be a symlink to either shared_210.scad or shared_094.scad
+shared.scad
