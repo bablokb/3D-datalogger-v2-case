@@ -8,7 +8,7 @@
 // ---------------------------------------------------------------------------
 
 include <BOSL2/std.scad>
-include <shared.scad>
+include <dimensions.scad>
 include <screw_pocket.scad>
 
 // --- generic module to create space for a PCB   ----------------------------
