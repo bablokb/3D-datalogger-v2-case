@@ -26,7 +26,7 @@ module sensor_cutouts(h) {
   z = h+2*FUZZ;
   // screw holes
   xflip_copy() yflip_copy()
-    move([-32,-25,-FUZZ]) xrot(180,cp=[0,0,z/2])
+    move([-X_PCB_V2/2+3,-Y_PCB_V2/2+3,-FUZZ]) xrot(180,cp=[0,0,z/2])
        screw_pocket(h=z, hull=true);
   // LED + app-buttons
   move([-15.4,17,-FUZZ]) cuboid([29.2,12,z], anchor=BOTTOM+CENTER);
@@ -58,7 +58,7 @@ module top_plate(h=BT) {
   // add screw holes
   move([XI_BASE/2-X_PCB_V2/2,y_off,0])
     xflip_copy() yflip_copy()
-      move([-32,-25,-FUZZ]) xrot(180,cp=[0,0,z/2])
+      move([-X_PCB_V2/2+3,-Y_PCB_V2/2+3,-FUZZ]) xrot(180,cp=[0,0,z/2])
          scale(1+FUZZ) screw_pocket(h=z, hull=false);
 }
 
