@@ -8,7 +8,7 @@
 // ---------------------------------------------------------------------------
 
 include <BOSL2/std.scad>
-include <shared.scad>
+include <shared_210.scad>
 include <pcb.scad>
 
 // --- create base-plate to fit all PCBs   -----------------------------------
