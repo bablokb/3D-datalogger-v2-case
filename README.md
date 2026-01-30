@@ -4,8 +4,10 @@ A case for the Pico-Datalogger v2
 This project provides the 3D-design-files (OpenSCAD) for a case
 for the Pico Datalogger (see https://github.com/bablokb/pcb-datalogger-v2).
 
-Note that you must symlink `shared.scad` to either `shared_210.scad` or
-`shared_094.scad`.
+The case is available for two versions: one for the very first
+iteration of the v2-pcb with size 46x60mm (with revision 0.94, gray
+buttons), and one for the second iteration with size 56x70mm (with
+revision 2.10, red buttons).
 
 
 License
