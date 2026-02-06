@@ -36,7 +36,7 @@ module sensor_cutouts(h) {
   // on + reset
   move([-23.95,-7.55,-FUZZ]) cuboid([12.1,18.7,z], anchor=BOTTOM+CENTER);
   // SCD4x connector
-  move([6.95,-0.8,-FUZZ]) cuboid([12.6,22.6,z], anchor=BOTTOM+CENTER);
+  move([6.45,-0.8,-FUZZ]) cuboid([13.6,22.6,z], anchor=BOTTOM+CENTER);
   // AHT20
   move([18.45,14.1,-FUZZ]) cuboid([8.5,10.2,z], anchor=BOTTOM+CENTER);
   // PDM
