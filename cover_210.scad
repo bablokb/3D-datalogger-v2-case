@@ -13,12 +13,15 @@ include <shared_210.scad>
 include <screw_pocket.scad>
 include <pico_pin_mask.scad>
 
+YZ_SIZE_SLANTED = sqrt((YO_BASE-Y_TOP)^2+H_COVER^2);
 echo("H_COVER        = ", H_COVER);
 echo("H_TOTOAL       = ", BT + H_BASE + H_COVER + Z_TOP);
 echo("YO_BASE        = ", YO_BASE);
 echo("Y_TOP          = ", Y_TOP);
-echo("yz-size slanted = ", sqrt((YO_BASE-Y_TOP)^2+H_COVER^2));
+echo("yz-size slanted = ", YZ_SIZE_SLANTED);
 echo("angle          = ", ANGLE);
+
+assert(YZ_SIZE_SLANTED > Y_PCB_DISPLAY, "increase H_COVER!");
 
 // --- cutouts for the sensor pcb   -------------------------------------------
 
