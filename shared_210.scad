@@ -61,7 +61,7 @@ Y_PCB_DISPLAY = 36.4;
 
 W_BASE  = W2;
 R_BASE  = 3;
-H_BASE  = 4;
+H_BASE  = 15;
 XI_BASE = X_PCB_V2 + 2 + X_PCB_LORA;
 XO_BASE = XI_BASE + 4*W_BASE + 2*GAP;
 YI_BASE = Y_PCB_V2 + Y_LIPO + 4*W2;
@@ -70,7 +70,7 @@ YO_BASE = YI_BASE + 4*W_BASE + 2*GAP;
 
 // cover
 
-H_COVER = 23;
+H_COVER = 30;
 Y_TOP   = YO_BASE - H_COVER;   // will force  angle=45°
 Z_TOP   = BT;
 P_DIFF  = Z_TOP / (H_COVER/(YO_BASE-Y_TOP));
