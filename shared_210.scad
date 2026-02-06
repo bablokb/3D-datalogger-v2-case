@@ -36,7 +36,8 @@ O_PCB_LIPO =  2.5;   // NPT offset
 X_PCB_LIPO_SW_OFF =  4 - 2*W2; // from left side
 Y_PCB_LIPO_SW_OFF =  1.515; //from center, left side
 Y_PCB_LIPO_SW     = 10.4;
-Z_PCB_LIPO_SW     = 4;
+Z_PCB_LIPO_SW     = 4;    // measured: 3
+H_PCB_LIPO_SCREW  = 3;    // this is actually the default
 
 X_PCB_LIPO_USB_OFF =  0;
 

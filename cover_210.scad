@@ -86,13 +86,14 @@ module cover(ztop=BT) {
 
 module lipo_charger_cutouts() {
   // USB
-  move([-XO_BASE/2+X_PCB_LIPO/2 + X_PCB_LIPO_SW_OFF,
-        -YO_BASE/2,-FUZZ])
-    cuboid([XY_USB,4*W_BASE,H_BASE+Z_USB], anchor=BOTTOM+CENTER);
+  move([ X_PCB_LIPO_SW_OFF-XI_BASE/2+X_PCB_LIPO/2,
+        -YO_BASE/2,H_PCB_LIPO_SCREW-BT])
+    cuboid([XY_USB,20,Z_USB], anchor=BOTTOM+CENTER);
   // slider
   move([-XO_BASE/2,
         -YI_BASE/2+Y_PCB_LIPO/2+Y_PCB_LIPO_SW_OFF,-FUZZ])
-    cuboid([4*W_BASE,Y_PCB_LIPO_SW,H_BASE+Z_PCB_LIPO_SW/2], anchor=BOTTOM+CENTER);
+    cuboid([4*W_BASE,Y_PCB_LIPO_SW,
+                 (H_PCB_LIPO_SCREW-BT)+Z_PCB+Z_PCB_LIPO_SW], anchor=BOTTOM+CENTER);
 }
 
 // --- cutouts for USB and I2C of PCB   ---------------------------------------

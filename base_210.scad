@@ -47,16 +47,20 @@ module lipo_charger_pcb(hull=false) {
   zm = hull ? -FUZZ : 0;
   move([X_PCB_LIPO_SW_OFF-XI_BASE/2+X_PCB_LIPO/2,
         -YI_BASE/2+Y_PCB_LIPO/2,zm]) {
-          pcb(X_PCB_LIPO, Y_PCB_LIPO, z, o_screw=O_PCB_LIPO,
+          pcb(X_PCB_LIPO, Y_PCB_LIPO, z,
+              h_screw=H_PCB_LIPO_SCREW,
+              o_screw=O_PCB_LIPO,
               edges=[], screws=!hull);
           if (hull) {
             // cutout switch
-            move([-X_PCB_LIPO/2,Y_PCB_LIPO_SW_OFF,z])
+            move([-X_PCB_LIPO/2,Y_PCB_LIPO_SW_OFF,
+                                         H_PCB_LIPO_SCREW+Z_PCB-GAP])
               cuboid([20,Y_PCB_LIPO_SW,Z_PCB+Z_PCB_LIPO_SW],
                 anchor=BOTTOM+CENTER);
             // cutout USB
-            move([X_PCB_LIPO_USB_OFF,-Y_PCB_LIPO/2,z])
-              cuboid([XY_USB,20,Z_PCB+Z_PCB_LIPO_SW],
+            move([X_PCB_LIPO_USB_OFF,-Y_PCB_LIPO/2,
+                                        H_PCB_LIPO_SCREW])
+              cuboid([XY_USB,20,Z_PCB+Z_USB],
                 anchor=BOTTOM+CENTER);
           }
         }
