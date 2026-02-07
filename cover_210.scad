@@ -105,9 +105,9 @@ module pcb_cutouts() {
   // I2C0 at right-edge
   move([XO_BASE/2,Y_PCB_I2C0_OFF,Z_PCB_I2C0_OFF])
     cuboid([4*W_BASE,XY_I2C,Z_I2C], anchor=BOTTOM+CENTER);
-  // USB at right-edge (enlarged to merge with sensor-pcb I2C)
-  move([XO_BASE/2,Y_PCB_USB_OFF-0.2,Z_PCB_USB_OFF])
-    cuboid([4*W_BASE,XY_USB+0.4,Z_USB+1.8], anchor=BOTTOM+CENTER);
+  // USB at right-edge
+  move([XO_BASE/2,Y_PCB_USB_OFF,Z_PCB_USB_OFF])
+    cuboid([4*W_BASE,XY_USB,Z_USB], anchor=BOTTOM+CENTER);
   // I2C1 at right-edge
   move([XO_BASE/2,Y_SENSOR_I2C1_OFF,Z_SENSOR_I2C1_OFF])
     cuboid([4*W_BASE,XY_I2C,Z_I2C], anchor=BOTTOM+CENTER);
