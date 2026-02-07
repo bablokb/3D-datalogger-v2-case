@@ -111,6 +111,17 @@ module pcb_cutouts() {
   // I2C1 at right-edge
   move([XO_BASE/2,Y_SENSOR_I2C1_OFF,Z_SENSOR_I2C1_OFF])
     cuboid([4*W_BASE,XY_I2C,Z_I2C], anchor=BOTTOM+CENTER);
+ // ventilation sides
+  D_VENT = 3;  // diameter
+  N_VENT = 5;  // count
+  move([0,Y_PCB_USB_OFF,Z_PCB_USB_OFF+1.5*Z_USB+D_VENT])
+      ycopies(1*XY_USB,n=N_VENT)
+        xcyl(l=2*YO_BASE+2*FUZZ,d=D_VENT);
+  // ventilation top
+  move([-XO_BASE/2+X_PCB_LIPO/2+XY_USB/2,-YO_BASE/2+Y_PCB_LIPO,0])
+    xcopies(0.5*XY_USB,n=3)
+      ycopies(0.5*XY_USB,n=3)
+        xrot(ANGLE) zcyl(l=2*YO_BASE+2*FUZZ,d=D_VENT/2);
 }
 
 // --- final object   ---------------------------------------------------------
