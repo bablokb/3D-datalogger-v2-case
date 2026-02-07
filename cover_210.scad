@@ -100,7 +100,7 @@ module lipo_charger_cutouts() {
 
 module pcb_cutouts() {
   // I2C1 at back-edge
-  move([-X_PCB_I2C1_OFF,YO_BASE/2,Z_PCB_I2C1_OFF])
+  move([X_PCB_I2C1_OFF,YO_BASE/2,Z_PCB_I2C1_OFF])
     cuboid([XY_I2C,4*W_BASE,Z_I2C], anchor=BOTTOM+CENTER);
   // I2C0 at right-edge
   move([XO_BASE/2,Y_PCB_I2C0_OFF,Z_PCB_I2C0_OFF])

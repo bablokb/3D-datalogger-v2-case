@@ -78,18 +78,19 @@ P_DIFF  = Z_TOP / (H_COVER/(YO_BASE-Y_TOP));
 ANGLE   = atan(H_COVER/(YO_BASE-Y_TOP));
 
 // offsets for USB and I2C
-C_PCB_OFF     = YO_BASE/2 - 2*W_BASE - GAP - Y_PCB_V2/2;   // center offset
-Y_PCB_USB_OFF =   C_PCB_OFF + 0.91;  // from center, right side
+CX_PCB_OFF     = XO_BASE/2 - 2*W_BASE - GAP - X_PCB_V2/2;   // x center offset
+CY_PCB_OFF     = YO_BASE/2 - 2*W_BASE - GAP - Y_PCB_V2/2;   // y center offset
+Y_PCB_USB_OFF =   CY_PCB_OFF + 0.91;  // from center, right side
 Z_PCB_USB_OFF =   H_PCB_V2_SCREW + Z_PCB + 10;
 
-Y_PCB_I2C0_OFF =  C_PCB_OFF + 0.91;  // from center, right side
+Y_PCB_I2C0_OFF =  CY_PCB_OFF + 0.91;  // from center, right side
 Z_PCB_I2C0_OFF =  H_PCB_V2_SCREW + Z_PCB;
 
-X_PCB_I2C1_OFF =  -7.86;  // from center, top side
+X_PCB_I2C1_OFF =  CX_PCB_OFF - 7.86;  // from center, top side
 Z_PCB_I2C1_OFF =  Z_PCB_I2C0_OFF;
 
 // I2C on sensor-pcb is centered
 // Z-offset calculated from total height (except panel)
-Y_SENSOR_I2C1_OFF =  C_PCB_OFF;
+Y_SENSOR_I2C1_OFF =  CY_PCB_OFF;
 Z_SENSOR_I2C1_OFF =  H_BASE + H_COVER - Z_PCB - Z_I2C;
 
