@@ -88,7 +88,7 @@ module lipo_charger_cutouts() {
   // USB
   move([ X_PCB_LIPO_SW_OFF-XI_BASE/2+X_PCB_LIPO/2,
         -YO_BASE/2,H_PCB_LIPO_SCREW-BT])
-    cuboid([XY_USB,20,Z_USB], anchor=BOTTOM+CENTER);
+    cuboid([XY_USB,20,Z_PCB+Z_USB], anchor=BOTTOM+CENTER);
   // slider
   move([-XO_BASE/2,
         -YI_BASE/2+Y_PCB_LIPO/2+Y_PCB_LIPO_SW_OFF,-FUZZ])
@@ -133,6 +133,9 @@ difference() {
   move([0,-YO_BASE/2+(YO_BASE-Y_TOP)/2,
           H_BASE+H_COVER/2]) xrot(ANGLE) pico_pin_mask();
 }
+
+// add base to check that cutouts fit
+//zmove(-BT) color("orange") import("base_210.stl");
 
 // intersection for a test print of the top panel
 //intersection() {
