@@ -55,7 +55,7 @@ module lipo_charger_pcb(hull=false) {
             // cutout switch
             move([-X_PCB_LIPO/2,Y_PCB_LIPO_SW_OFF,
                                          H_PCB_LIPO_SCREW+Z_PCB-GAP])
-              cuboid([20,Y_PCB_LIPO_SW,Z_PCB+Z_PCB_LIPO_SW],
+              cuboid([20,Y_PCB_LIPO_SW,GAP+Z_PCB_LIPO_SW],
                 anchor=BOTTOM+CENTER);
             // cutout USB
             move([X_PCB_LIPO_USB_OFF,-Y_PCB_LIPO/2,
@@ -82,6 +82,17 @@ module lipo(hull=false) {
   }
 }
 
+// --- cutouts for USB and I2C of PCB   ---------------------------------------
+
+module pcb_cutouts() {
+  // I2C1 at back-edge
+  move([X_PCB_I2C1_OFF,YI_BASE/2,Z_PCB_I2C1_OFF+BT])
+    cuboid([XY_I2C,4*W_BASE,Z_I2C], anchor=BOTTOM+CENTER);
+  // I2C0 at right-edge
+  move([XI_BASE/2,Y_PCB_I2C0_OFF,Z_PCB_I2C0_OFF+BT])
+    cuboid([4*W_BASE,XY_I2C,Z_I2C], anchor=BOTTOM+CENTER);
+}
+
 // --- final object   -------------------------------------------------------
 
 module base() {
@@ -92,6 +103,8 @@ module base() {
     lora_pcb(hull=true);
     lipo_charger_pcb(hull=true);
     lipo(hull=true);
+    // remove cutouts
+    pcb_cutouts();
   }
   // add back PCBs
   color("blue") v2_pcb();
