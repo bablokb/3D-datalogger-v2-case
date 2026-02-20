@@ -9,6 +9,19 @@ iteration of the v2-pcb with size 46x60mm (with revision 0.94, gray
 buttons), and one for the second iteration with size 56x70mm (with
 revision 2.10, red buttons).
 
+Base with Pico, Lipo, Lipo-charger (front left) and LoRa-PCB (back
+left):
+
+![](base.jpg)
+
+Cover with sensor-PCB and display-adapter:
+
+![](cover.jpg)
+
+Finished assembly:
+
+![](complete.jpg)
+
 
 License
 -------
