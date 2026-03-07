@@ -68,9 +68,11 @@ XO_BASE = XI_BASE + 4*W_BASE + 2*GAP;
 YI_BASE = Y_PCB_V2 + Y_LIPO + 4*W2;
 YO_BASE = YI_BASE + 4*W_BASE + 2*GAP;
 
+// locks
+LOCK_OFFSET = 6;
+LOCK_Z_OFF  = BT+H_BASE/2;
 
 // cover
-
 H_COVER = 30;
 Y_TOP   = YO_BASE - H_COVER;   // will force  angle=45°
 Z_TOP   = BT;

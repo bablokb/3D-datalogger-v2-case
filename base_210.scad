@@ -10,6 +10,7 @@
 include <BOSL2/std.scad>
 include <shared_210.scad>
 include <pcb.scad>
+include <wall_locks.scad>
 
 // --- create base-plate to fit all PCBs   -----------------------------------
 
@@ -111,6 +112,13 @@ module base() {
   color("red") lora_pcb();
   color("green") lipo_charger_pcb();
   color("pink") lipo();
+  // add wall-locks
+  color("cyan") zmove(LOCK_Z_OFF)
+    wall_lock(XI_BASE+2*W_BASE,YI_BASE+2*W_BASE,
+              count=3, space=[XI_BASE/2-LOCK_OFFSET,
+                              YI_BASE/2-LOCK_OFFSET,
+                              XI_BASE/2-LOCK_OFFSET,
+                              YI_BASE/2-LOCK_OFFSET] );
 }
 
 base();

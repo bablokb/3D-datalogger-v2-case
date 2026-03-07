@@ -12,6 +12,7 @@ include <dimensions.scad>
 include <shared_210.scad>
 include <screw_pocket.scad>
 include <pico_pin_mask.scad>
+include <wall_locks.scad>
 
 YZ_SIZE_SLANTED = sqrt((YO_BASE-Y_TOP)^2+H_COVER^2);
 echo("H_COVER        = ", H_COVER);
@@ -132,6 +133,13 @@ difference() {
   pcb_cutouts();
   move([0,-YO_BASE/2+(YO_BASE-Y_TOP)/2,
           H_BASE+H_COVER/2]) xrot(ANGLE) pico_pin_mask();
+  // wall-locks
+  zmove(LOCK_Z_OFF-BT)
+    wall_lock(XI_BASE+2*W_BASE+2*GAP,YI_BASE+2*W_BASE+2*GAP,
+              count=3, space=[XI_BASE/2-LOCK_OFFSET,
+                              YI_BASE/2-LOCK_OFFSET,
+                              XI_BASE/2-LOCK_OFFSET,
+                              YI_BASE/2-LOCK_OFFSET], mask=true);
 }
 
 // add base to check that cutouts fit
