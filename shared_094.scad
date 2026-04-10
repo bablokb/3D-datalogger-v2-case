@@ -29,11 +29,18 @@ H_PCB_V2_SCREW = 6;      // hight screw-pocket above BT (base-thickness)
 X_PCB_LORA = 36.5;
 Y_PCB_LORA = 33.0;
 
-// Bat holder
+// PH2 holder: the socket has two parts, a smaller part with the wires (*1_PH2)
+//             and a larger part with the actual socket (*2_PH2)
 
-X_BAT = 64;
-Y_BAT = 28.5;
-Z_BAT = 15;
+X1_PH2 = 7;
+Y1_PH2 = 4.6 + GAP/2;
+Z1_PH2 = 3 + 1;
+O1_PH2 = 1.4;                 // Z-offset of small part
+X2_PH2 = 6.5;
+Y2O_PH2 = 6+GAP/2;            // Y-size of the socket (outer dims)
+Y2I_PH2 = 4.6;                // Y-size of the plug (inner dims)
+Z2_PH2 = 5+GAP/2;
+O2_PH2 = 10;                  // Y-offset from cover front
 
 // Display holder
 X_PCB_DISPLAY = 68.26;
@@ -49,7 +56,7 @@ R_BASE  = 3;
 H_BASE  = 10;
 XI_BASE = X_PCB_V2 + 2 + X_PCB_LORA;
 XO_BASE = XI_BASE + 4*W_BASE + 2*GAP;
-YI_BASE = Y_PCB_V2 + Y_BAT + 4*W2;
+YI_BASE = Y_PCB_V2 + 37 + 4*W2;           // 37 is Y_LIPO from shared_210
 YO_BASE = YI_BASE + 4*W_BASE + 2*GAP;
 
 // cover

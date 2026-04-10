@@ -41,20 +41,10 @@ module lora_pcb(hull=false) {
           pcb(X_PCB_LORA, Y_PCB_LORA, z, edges=[], screws=!hull);
 }
 
-// --- module for the battery   ----------------------------------------------
+// --- module for the PH2 socket   -------------------------------------------
 
-module bat() {
-  x = X_BAT + 2*W2;
-  y = Y_BAT + 2*W2;
-  move([XI_BASE/2-x/2+W2,-YI_BASE/2+y/2,0]) {
-    // bat-holder (wall with cutout for cable)
-    difference() {
-      rect_tube(h=Z_BAT+BT, size=[x,y], wall=W2, anchor=BOTTOM+CENTER);
-      move([-x/2,y/2,0]) cuboid([5,5,Z_BAT+BT+FUZZ], anchor=BOTTOM+CENTER);
-      move([+X_BAT/2,0,0])
-        cuboid([4*W2,y+2*FUZZ,Z_BAT+BT+FUZZ], anchor=BOTTOM+CENTER);
-    }
-  }
+module ph2() {
+  // TODO: holder
 }
 
 // --- final object   -------------------------------------------------------
@@ -65,9 +55,9 @@ module base() {
     plate();
     v2_pcb(hull=true);
     lora_pcb(hull=false);
-    // cutout for battery
-    move([+XI_BASE/2,-YI_BASE/2+Y_BAT/2+W2,BT-FUZZ])
-        cuboid([4*W2,Y_BAT,H_BASE+2*FUZZ], anchor=BOTTOM+CENTER);
+    // cutout for PH2-socket
+    move([+XI_BASE/2,-YI_BASE/2+Y2I_PH2/2+O2_PH2,BT-FUZZ])
+        cuboid([4*W2,Y2I_PH2,Z2_PH2+2*FUZZ], anchor=BOTTOM+CENTER);
     // cutout for I2C0 (THT)
     move([XI_BASE/2,Y_PCB_I2C0_OFF,Z_PCB_I2C0_OFF])
       cuboid([4*W_BASE,XY_I2C_THT,Z_I2C_THT], anchor=BOTTOM+CENTER);
@@ -78,7 +68,7 @@ module base() {
   // add back PCBs
   color("blue") v2_pcb();
   color("red") lora_pcb();
-  color("pink") bat();
+  color("pink") ph2();
 }
 
 base();

@@ -105,9 +105,9 @@ module pcb_cutouts() {
 //difference() {
 //  cover(ztop=Z_TOP);
 //  pcb_cutouts();
-//  // cutout for battery
-//  move([+XI_BASE/2,-YI_BASE/2+Y_BAT/2+W2,-FUZZ])
-//        cuboid([8*W2,Y_BAT,H_BASE+2*FUZZ], anchor=BOTTOM+CENTER);
+//  // cutout for PH2-socket
+//  move([+XI_BASE/2,-YI_BASE/2+Y2I_PH2/2+O2_PH2,-FUZZ])
+//        cuboid([8*W2,Y2I_PH2,Z2_PH2+2*FUZZ], anchor=BOTTOM+CENTER);
 //  // cutout for pins
 //  move([0,-YO_BASE/2+(YO_BASE-Y_TOP)/2,
 //          H_BASE+H_COVER/2]) xrot(ANGLE) pico_pin_mask();
