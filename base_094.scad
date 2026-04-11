@@ -44,7 +44,30 @@ module lora_pcb(hull=false) {
 // --- module for the PH2 socket   -------------------------------------------
 
 module ph2() {
-  // TODO: holder
+  move([+XI_BASE/2-X2_PH2+W_BASE,-YI_BASE/2+Y2I_PH2/2+O2_PH2,0]) {
+    // smaller part (cable connector). This will create only the walls on the
+    // x-axis
+    xmove(-X1_PH2/2) difference() {
+      cuboid([X1_PH2,Y1_PH2+2*W2,Z1_PH2+BT], anchor=BOTTOM+CENTER);
+      zmove(O1_PH2+BT)
+        cuboid([X1_PH2+2*W2,Y1_PH2,Z1_PH2+BT-O1_PH2+FUZZ], anchor=BOTTOM+CENTER);
+    }
+    // larger part (socket)
+    xmove(X2_PH2/2) difference() {
+      cuboid([X2_PH2,Y2O_PH2+2*W2,Z2_PH2+BT], anchor=BOTTOM+CENTER);
+      move([W2+FUZZ,0,BT])
+        cuboid([X2_PH2+3*W2,Y2O_PH2,Z2_PH2+BT+FUZZ], anchor=BOTTOM+CENTER);
+    }
+    // cable holders
+    CABLE_GAP = 1;
+    ymove(2*CABLE_GAP+2*W4) ycopies(2*CABLE_GAP+4*W2,3) {
+      yflip_copy()
+        move([-2*X1_PH2,CABLE_GAP+W2/2,0])
+          cuboid([X1_PH2,W2,Z1_PH2+BT], anchor=BOTTOM+CENTER);
+      xmove(-2*X1_PH2)
+          cuboid([X1_PH2,2*CABLE_GAP+2*W2,BT], anchor=BOTTOM+CENTER);
+    }
+  }
 }
 
 // --- final object   -------------------------------------------------------
@@ -54,7 +77,7 @@ module base() {
   difference() {
     plate();
     v2_pcb(hull=true);
-    lora_pcb(hull=false);
+    lora_pcb(hull=true);
     // cutout for PH2-socket
     move([+XI_BASE/2,-YI_BASE/2+Y2I_PH2/2+O2_PH2,BT-FUZZ])
         cuboid([4*W2,Y2I_PH2,Z2_PH2+2*FUZZ], anchor=BOTTOM+CENTER);
