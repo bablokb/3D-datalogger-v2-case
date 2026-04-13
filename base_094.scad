@@ -41,10 +41,19 @@ module lora_pcb(hull=false) {
           pcb(X_PCB_LORA, Y_PCB_LORA, z, edges=[], screws=!hull);
 }
 
+// --- cable holder   --------------------------------------------------------
+
+module cable_holder(x,y=1,z=4,w=W2,n=1) {
+  ycopies(2*y+4*w,n)
+    yflip_copy()
+      move([0,y+w/2,0])
+        cuboid([x,w,z], anchor=BOTTOM+CENTER);
+}
+
 // --- module for the PH2 socket   -------------------------------------------
 
 module ph2() {
-  move([+XI_BASE/2-X2_PH2+W_BASE,-YI_BASE/2+Y2I_PH2/2+O2_PH2,0]) {
+  move([+XO_BASE/2-X2_PH2,-YI_BASE/2+Y2_PH2/2+O2_PH2,0]) {
     // smaller part (cable connector). This will create only the walls on the
     // x-axis
     xmove(-X1_PH2/2) difference() {
@@ -54,19 +63,15 @@ module ph2() {
     }
     // larger part (socket)
     xmove(X2_PH2/2) difference() {
-      cuboid([X2_PH2,Y2O_PH2+2*W2,Z2_PH2+BT], anchor=BOTTOM+CENTER);
+      cuboid([X2_PH2,Y2_PH2+2*W2,Z2_PH2+BT], anchor=BOTTOM+CENTER);
       move([W2+FUZZ,0,BT])
-        cuboid([X2_PH2+3*W2,Y2O_PH2,Z2_PH2+BT+FUZZ], anchor=BOTTOM+CENTER);
+        cuboid([X2_PH2+3*W2,Y2_PH2,Z2_PH2+BT+FUZZ], anchor=BOTTOM+CENTER);
     }
     // cable holders
     CABLE_GAP = 1;
-    ymove(2*CABLE_GAP+2*W4) ycopies(2*CABLE_GAP+4*W2,3) {
-      yflip_copy()
-        move([-2*X1_PH2,CABLE_GAP+W2/2,0])
-          cuboid([X1_PH2,W2,Z1_PH2+BT], anchor=BOTTOM+CENTER);
-      xmove(-2*X1_PH2)
-          cuboid([X1_PH2,2*CABLE_GAP+2*W2,BT], anchor=BOTTOM+CENTER);
-    }
+    move([-3*X1_PH2,0,0]) cable_holder(X1_PH2,CABLE_GAP,n=3);
+    move([-XO_BASE/2,0,0]) cable_holder(X1_PH2,CABLE_GAP,n=3);
+    move([-0.75*XO_BASE,0,0]) cable_holder(X1_PH2,CABLE_GAP,n=3);
   }
 }
 
@@ -79,8 +84,8 @@ module base() {
     v2_pcb(hull=true);
     lora_pcb(hull=true);
     // cutout for PH2-socket
-    move([+XI_BASE/2,-YI_BASE/2+Y2I_PH2/2+O2_PH2,BT-FUZZ])
-        cuboid([4*W2,Y2I_PH2,Z2_PH2+2*FUZZ], anchor=BOTTOM+CENTER);
+    move([+XI_BASE/2,-YI_BASE/2+Y2_PH2/2+O2_PH2,BT-FUZZ])
+        cuboid([4*W2,Y2_PH2,Z2_PH2+2*FUZZ], anchor=BOTTOM+CENTER);
     // cutout for I2C0 (THT)
     move([XI_BASE/2,Y_PCB_I2C0_OFF,Z_PCB_I2C0_OFF])
       cuboid([4*W_BASE,XY_I2C_THT,Z_I2C_THT], anchor=BOTTOM+CENTER);
@@ -95,3 +100,12 @@ module base() {
 }
 
 base();
+
+// Test: matching cutouts
+//include <cover_094.scad>
+//color("aqua") zmove(BT) cover_final();
+
+//intersection() {
+//  base();
+//  move([35,-33,0]) cuboid([40,25,H_BASE], anchor=BOTTOM+CENTER);
+//}

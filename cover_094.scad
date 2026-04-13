@@ -90,7 +90,7 @@ module cover(ztop=BT) {
 
 module pcb_cutouts() {
   // I2C0 at right-edge
-  move([XO_BASE/2,Y_PCB_I2C0_OFF,Z_PCB_I2C0_OFF])
+  move([XO_BASE/2,Y_PCB_I2C0_OFF,Z_PCB_I2C0_OFF-BT])
     cuboid([4*W_BASE,XY_I2C_THT,Z_I2C_THT], anchor=BOTTOM+CENTER);
   // USB at right-edge
   move([XO_BASE/2,Y_PCB_USB_OFF,Z_PCB_USB_OFF])
@@ -98,24 +98,33 @@ module pcb_cutouts() {
   // I2C1 at right-edge
   move([XO_BASE/2,Y_SENSOR_I2C1_OFF,Z_SENSOR_I2C1_OFF])
     cuboid([4*W_BASE,XY_I2C,Z_I2C], anchor=BOTTOM+CENTER);
+   // ventilation sides
+  D_VENT = 3;  // diameter
+  N_VENT = 4;  // count
+  move([0,Y_SENSOR_I2C1_OFF,Z_PCB_USB_OFF+Z_USB+D_VENT])
+      ycopies(1*XY_USB,n=N_VENT)
+        xcyl(l=2*YO_BASE+2*FUZZ,d=D_VENT);
 }
 
 // --- final object   ---------------------------------------------------------
 
-//difference() {
-//  cover(ztop=Z_TOP);
-//  pcb_cutouts();
-//  // cutout for PH2-socket
-//  move([+XI_BASE/2,-YI_BASE/2+Y2I_PH2/2+O2_PH2,-FUZZ])
-//        cuboid([8*W2,Y2I_PH2,Z2_PH2+2*FUZZ], anchor=BOTTOM+CENTER);
-//  // cutout for pins
-//  move([0,-YO_BASE/2+(YO_BASE-Y_TOP)/2,
-//          H_BASE+H_COVER/2]) xrot(ANGLE) pico_pin_mask();
-//}
+module cover_final() {
+  difference() {
+    cover(ztop=Z_TOP);
+    pcb_cutouts();
+    // cutout for PH2-socket
+    move([+XI_BASE/2,-YI_BASE/2+Y2_PH2/2+O2_PH2,-FUZZ])
+          cuboid([8*W2,Y2_PH2+GAP,Z2_PH2+2*FUZZ], anchor=BOTTOM+CENTER);
+    // cutout for pins
+    move([0,-YO_BASE/2+(YO_BASE-Y_TOP)/2,
+            H_BASE+H_COVER/2]) xrot(ANGLE) pico_pin_mask();
+  }
+}
+cover_final();
 
 // intersection for a test print of the top panel
-intersection() {
-  top_plate(h=Z_TOP);
-  move([XO_BASE/2-X_PCB_V2/2,5,-FUZZ])
-    cuboid([X_PCB_V2+20,YO_BASE-30,0.6], anchor=BOTTOM+CENTER);
-}
+//intersection() {
+//  top_plate(h=Z_TOP);
+//  move([XO_BASE/2-X_PCB_V2/2,5,-FUZZ])
+//    cuboid([X_PCB_V2+20,YO_BASE-30,0.6], anchor=BOTTOM+CENTER);
+//}

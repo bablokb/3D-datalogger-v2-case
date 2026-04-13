@@ -37,8 +37,7 @@ Y1_PH2 = 4.6 + GAP/2;
 Z1_PH2 = 3 + 1;
 O1_PH2 = 1.4;                 // Z-offset of small part
 X2_PH2 = 6.5;
-Y2O_PH2 = 6+GAP/2;            // Y-size of the socket (outer dims)
-Y2I_PH2 = 4.6;                // Y-size of the plug (inner dims)
+Y2_PH2 = 6+GAP;               // Y-size of the socket (outer dims)
 Z2_PH2 = 5+GAP/2;
 O2_PH2 = 10;                  // Y-offset from cover front
 
