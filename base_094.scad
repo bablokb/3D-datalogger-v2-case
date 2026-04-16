@@ -65,7 +65,7 @@ module ph2() {
     xmove(X2_PH2/2) difference() {
       cuboid([X2_PH2,Y2_PH2+2*W2,Z2_PH2+BT], anchor=BOTTOM+CENTER);
       move([W2+FUZZ,0,BT])
-        cuboid([X2_PH2+3*W2,Y2_PH2,Z2_PH2+BT+FUZZ], anchor=BOTTOM+CENTER);
+        cuboid([X2_PH2+3*W2,Y2_PH2,Z2_PH2+FUZZ], anchor=BOTTOM+CENTER);
     }
     // cable holders
     CABLE_GAP = 1;
