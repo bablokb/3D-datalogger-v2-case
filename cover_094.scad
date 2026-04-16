@@ -114,7 +114,7 @@ module cover_final() {
     pcb_cutouts();
     // cutout for PH2-socket
     move([+XI_BASE/2,-YI_BASE/2+Y2_PH2/2+O2_PH2,-FUZZ])
-          cuboid([8*W2,Y2_PH2+GAP,Z2_PH2+2*FUZZ], anchor=BOTTOM+CENTER);
+          cuboid([8*W2,Y2_PH2+2*W2+GAP,Z2_PH2+GAP/2], anchor=BOTTOM+CENTER);
     // cutout for pins
     move([0,-YO_BASE/2+(YO_BASE-Y_TOP)/2,
             H_BASE+H_COVER/2]) xrot(ANGLE) pico_pin_mask();
