@@ -70,7 +70,7 @@ ANGLE   = atan(H_COVER/(YO_BASE-Y_TOP));
 // center (offset) of pcb in case
 C_PCB_OFF     = YO_BASE/2 - 2*W_BASE - GAP - Y_PCB_V2/2;
 Y_PCB_USB_OFF =   C_PCB_OFF + 5.91;  // from center, right side
-Z_PCB_USB_OFF =   H_PCB_V2_SCREW + Z_PCB + 13.8;
+Z_PCB_USB_OFF =   H_PCB_V2_SCREW + Z_PCB + 10;
 
 Y_PCB_I2C0_OFF =  C_PCB_OFF + 6.14;  // from center, right side
 Z_PCB_I2C0_OFF =  BT + H_PCB_V2_SCREW - Z_I2C_THT;
